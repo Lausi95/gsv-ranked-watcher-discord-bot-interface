@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class SummonerSummonerExtension(@Value("\${discord.guild-id}") val discordGuildId: Long): Extension() {
+private class SummonerSummonerExtension(@Value("\${discord.guild-id}") val discordGuildId: Long): Extension() {
 
   override val name = "summoner-summoner"
 

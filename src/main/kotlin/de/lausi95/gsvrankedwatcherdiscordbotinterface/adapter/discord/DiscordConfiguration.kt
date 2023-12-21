@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.event.EventListener
 
 @Configuration
-class DiscordConfiguration(
+private class DiscordConfiguration(
   val discordBotExtensions: List<Extension>,
   @Value("\${discord.bot-token}") val discordBotToken: String
 ) {

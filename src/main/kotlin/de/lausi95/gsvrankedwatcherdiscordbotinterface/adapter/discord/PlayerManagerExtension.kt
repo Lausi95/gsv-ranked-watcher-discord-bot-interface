@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class PlayerManagerExtension(
+private class PlayerManagerExtension(
   val playerNotifier: PlayerNotifier,
   @Value("\${discord.guild-id}") val discordGuildId: Long
 ) : Extension() {
