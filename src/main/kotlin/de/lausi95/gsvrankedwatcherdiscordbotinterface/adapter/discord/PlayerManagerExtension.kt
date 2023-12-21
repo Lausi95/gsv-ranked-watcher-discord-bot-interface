@@ -19,19 +19,6 @@ class PlayerManagerExtension(
   override val name = "player-manager"
 
   override suspend fun setup() {
-    publicSlashCommand(::SummonArgs) {
-      name = "summon"
-      description = "summons someone"
-      guild(discordGuildId)
-
-      action {
-        val target = arguments.target
-        respond {
-          content = "༼ つ ◕_◕ ༽つ ${target.mention}"
-        }
-      }
-    }
-
     publicSlashCommand(::AddPlayerArgs) {
       name = "add_player"
       description = "Adds a player to the ranked watcher"
@@ -60,13 +47,6 @@ class PlayerManagerExtension(
           content = "Summoner '$summonerName' as requested to be removed from the ranked watcher"
         }
       }
-    }
-  }
-
-  inner class SummonArgs: Arguments() {
-    val target by user {
-      name = "target"
-      description = "Person you want to summon"
     }
   }
 
