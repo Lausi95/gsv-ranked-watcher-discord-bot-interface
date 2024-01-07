@@ -1,9 +1,5 @@
-spring:
-  kafka:
-    producer:
-      bootstrap-servers: ${KAFKA_URL}
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+player-manager:
+  host: ${PLAYER_MANAGER_HOST}
 
 discord:
   bot-token: ${DISCORD_BOT_TOKEN}

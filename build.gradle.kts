@@ -29,7 +29,6 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-actuator")
-  implementation("org.springframework.kafka:spring-kafka")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
   implementation("dev.kord:kord-core:0.8.0")

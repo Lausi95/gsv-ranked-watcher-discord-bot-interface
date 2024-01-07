@@ -5,13 +5,13 @@ import com.kotlindiscord.kord.extensions.commands.converters.impl.string
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
 import com.kotlindiscord.kord.extensions.types.respond
-import de.lausi95.gsvrankedwatcherdiscordbotinterface.domain.service.PlayerNotifier
+import de.lausi95.gsvrankedwatcherdiscordbotinterface.domain.service.PlayerAdapter
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
 private class PlayerManagerExtension(
-  val playerNotifier: PlayerNotifier,
+  val playerAdapter: PlayerAdapter,
   @Value("\${discord.guild-id}") val discordGuildId: Long
 ) : Extension() {
 
@@ -25,10 +25,15 @@ private class PlayerManagerExtension(
 
       action {
         val summonerName = arguments.summonerName
-        playerNotifier.notifyPlayerAdded(summonerName)
-
-        respond {
-          content = "Summoner '$summonerName' as requested to be added to the ranked watcher"
+        try {
+          playerAdapter.addPlayer(summonerName)
+          respond {
+            content = "Summoner with summoner name $summonerName was added to the watcher!"
+          }
+        } catch (ex: Exception) {
+          respond {
+            content = "Could not add summoner with summoner name $summonerName to the watcher. Reason: ${ex.message}"
+          }
         }
       }
     }
@@ -40,10 +45,15 @@ private class PlayerManagerExtension(
 
       action {
         val summonerName = arguments.summonerName
-        playerNotifier.notifyPlayerRemoved(summonerName)
-
-        respond {
-          content = "Summoner '$summonerName' as requested to be removed from the ranked watcher"
+        try {
+          playerAdapter.removePlayer(summonerName)
+          respond {
+            content = "Summoner '$summonerName' as requested to be removed from the ranked watcher"
+          }
+        } catch (ex: Exception) {
+          respond {
+            content = "Could not remove summoner with summoner name $summonerName. Reason: ${ex.message}"
+          }
         }
       }
     }
